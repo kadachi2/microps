@@ -64,11 +64,9 @@ app_main(void)
 {
     debugf("press Ctrl+C to terminate");
     while (!terminate) {
-        while (!terminate) {
-            if (net_device_output(dev, 0x0800, test_data, sizeof(test_data), NULL) == -1) {
-                errorf("net_device_output() failure");
-                break;
-            }
+        if (net_device_output(dev, NET_PROTOCOL_TYPE_IP, test_data, sizeof(test_data), NULL) == -1) {
+            errorf("net_device_output() failure");
+            break;
         }
         sleep(1);
     }
